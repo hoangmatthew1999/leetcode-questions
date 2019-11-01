@@ -8,16 +8,17 @@ class linkedListNode {
         let previous = list.data;
         let reverse = list;
         while(traversal != null){
-            //console.log(reverse,"linked next");
+            console.log(reverse,"linked next");
             reverse.next = previous;
-            console.log(reverse,"linked next", previous);
+            //console.log(reverse,"linked next");
+            //console.log(previous,'previous');
 
             previous = traversal;
             //console.log(previous.data,"previous");
 
             //console.log(traversal.data);
            traversal = traversal.next; 
-           console.log("new loop");
+           //console.log("new loop\n");
         }
     }
 }
