@@ -4,27 +4,20 @@ class linkedListNode {
         this.next = null;
     }
     reverse(list){
-        let traversal = list.next;
-        let previous = list.data;
-        let reverse = list;
-        while(traversal != null){
-            console.log(reverse,"linked next");
-            reverse.next = previous;
-            //console.log(reverse,"linked next");
-            //console.log(previous,'previous');
-
-            previous = traversal;
-            //console.log(previous.data,"previous");
-
-            //console.log(traversal.data);
-           traversal = traversal.next; 
-           //console.log("new loop\n");
+        let previous = null;
+        let current = list;
+        let next;
+        while(current != null){
+            next = current.next;
+            current.next = previous; //reversing 
+            previous = current;
+            current = next;
         }
-    }
+        }
 }
-const head = new linkedListNode(12);
-head.next = new linkedListNode(37);
-head.next.next = new linkedListNode(123);
-head.next.next.next = new linkedListNode(49);
+const head = new linkedListNode(1);
+head.next = new linkedListNode(2);
+head.next.next = new linkedListNode(3);
+head.next.next.next = new linkedListNode(4);
 
 head.reverse(head);
