@@ -12,7 +12,9 @@ class linkedListNode {
             current.next = previous; //reversing 
             previous = current;
             current = next;
+            // console.log(previous);
         }
+        return previous;
         }
 }
 const head = new linkedListNode(1);
@@ -20,4 +22,4 @@ head.next = new linkedListNode(2);
 head.next.next = new linkedListNode(3);
 head.next.next.next = new linkedListNode(4);
 
-head.reverse(head);
+console.log( head.reverse(head) );
