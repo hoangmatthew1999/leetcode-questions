@@ -1,0 +1,55 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        if len(matrix) == 1:
+            return matrix
+        offset = 0
+
+        # i = 0
+        # topAcrossTemp = matrix[0][i]
+        # leftUpTemp = matrix[len(matrix)-1-i][0]
+        # rightDownTemp = matrix[i][len(matrix)-1-i]   
+        # bottomAcrossTemp = matrix[len(matrix)-1][len(matrix)-1-i]
+
+        # matrix[0][i] = leftUpTemp   
+        # matrix[i][len(matrix)-1] = topAcrossTemp
+        # matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp
+        # matrix[len(matrix)-1-i][0] = bottomAcrossTemp
+
+        # i = 1
+        # topAcrossTemp = matrix[0][i]
+        # leftUpTemp = matrix[len(matrix)-1-i][0]
+        # rightDownTemp = matrix[i][len(matrix)-1]   
+        # bottomAcrossTemp = matrix[len(matrix)-1][len(matrix)-1-i]
+
+        # matrix[0][i] = leftUpTemp   
+        # matrix[i][len(matrix)-1] = topAcrossTemp
+        # matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp
+        # matrix[len(matrix)-1-i][0] = bottomAcrossTemp
+
+        for i in range(len(matrix) - 1):
+            topAcrossTemp = matrix[0][i]
+            leftUpTemp = matrix[len(matrix)-1-i][0]
+            rightDownTemp = matrix[i][len(matrix)-1]   #source of problem
+            bottomAcrossTemp = matrix[len(matrix)-1][len(matrix)-1-i]
+
+            print(topAcrossTemp, leftUpTemp, rightDownTemp, bottomAcrossTemp)
+            matrix[0][i] = leftUpTemp   
+            matrix[i][len(matrix)-1] = topAcrossTemp
+            matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp #unit test 
+            matrix[len(matrix)-1-i][0] = bottomAcrossTemp
+
+        
+
+
+     
+
+        
+
+       
+
+
+
+
