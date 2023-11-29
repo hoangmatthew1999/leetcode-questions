@@ -5,41 +5,66 @@ class Solution:
         """
         if len(matrix) == 1:
             return matrix
-        offset = 0
-
-        # i = 0
-        # topAcrossTemp = matrix[0][i]
-        # leftUpTemp = matrix[len(matrix)-1-i][0]
-        # rightDownTemp = matrix[i][len(matrix)-1-i]   
-        # bottomAcrossTemp = matrix[len(matrix)-1][len(matrix)-1-i]
-
-        # matrix[0][i] = leftUpTemp   
-        # matrix[i][len(matrix)-1] = topAcrossTemp
-        # matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp
-        # matrix[len(matrix)-1-i][0] = bottomAcrossTemp
-
-        # i = 1
-        # topAcrossTemp = matrix[0][i]
-        # leftUpTemp = matrix[len(matrix)-1-i][0]
-        # rightDownTemp = matrix[i][len(matrix)-1]   
-        # bottomAcrossTemp = matrix[len(matrix)-1][len(matrix)-1-i]
-
-        # matrix[0][i] = leftUpTemp   
-        # matrix[i][len(matrix)-1] = topAcrossTemp
-        # matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp
-        # matrix[len(matrix)-1-i][0] = bottomAcrossTemp
 
         for i in range(len(matrix) - 1):
             topAcrossTemp = matrix[0][i]
             leftUpTemp = matrix[len(matrix)-1-i][0]
-            rightDownTemp = matrix[i][len(matrix)-1]   #source of problem
+            rightDownTemp = matrix[i][len(matrix)-1]   
             bottomAcrossTemp = matrix[len(matrix)-1][len(matrix)-1-i]
 
-            print(topAcrossTemp, leftUpTemp, rightDownTemp, bottomAcrossTemp)
             matrix[0][i] = leftUpTemp   
             matrix[i][len(matrix)-1] = topAcrossTemp
-            matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp #unit test 
+            matrix[len(matrix)-1][len(matrix)-1-i] = rightDownTemp 
             matrix[len(matrix)-1-i][0] = bottomAcrossTemp
+        
+        numberOfNonCenterPerRow = 2
+        TotalcenterIterations = len(matrix)  - numberOfNonCenterPerRow 
+        firstTempStartingIndex = 1
+        numberOfCenters = 
+        if len(matrix) >= 4:
+            for iterations in range(TotalcenterIterations - 1):
+                firstTemp = matrix[firstTempStartingIndex][firstTempStartingIndex+iterations]
+                secondTemp = matrix[firstTempStartingIndex+iterations][len(matrix)-2]
+                thirdTemp = matrix[len(matrix)-2-iterations][firstTempStartingIndex]
+                fourthTemp = matrix[len(matrix)-2][len(matrix)-2-iterations]
+
+                matrix[firstTempStartingIndex][firstTempStartingIndex+iterations] = thirdTemp
+                matrix[firstTempStartingIndex+iterations][len(matrix)-2] = firstTemp
+                matrix[len(matrix)-2-iterations][firstTempStartingIndex] = fourthTemp
+                matrix[len(matrix)-2][len(matrix)-2-iterations] = secondTemp
+
+
+
+
+
+
+
+
+
+            # for loopIterations in range(TotalcenterIterations - 1):
+            #     firstTemp = matrix[1][1]
+            #     secondTemp = matrix[1][len(matrix)-2]
+            #     thirdTemp = matrix[len(matrix)-2][1]
+            #     fourthTemp = matrix[len(matrix)-2][len(matrix)-2]
+            #     print(firstTemp)
+
+            #     matrix[1][1] = thirdTemp
+            #     matrix[1][len(matrix)-2] = firstTemp
+            #     matrix[len(matrix)-2][1] = fourthTemp
+            #     matrix[len(matrix)-2][len(matrix)-2] = secondTemp
+
+            # firstTemp = matrix[1][1]
+            # secondTemp = matrix[1][len(matrix)-2]
+            # thirdTemp = matrix[len(matrix)-2][1]
+            # fourthTemp = matrix[len(matrix)-2][len(matrix)-2]
+
+            # matrix[1][1] = thirdTemp
+            # matrix[1][len(matrix)-2] = firstTemp
+            # matrix[len(matrix)-2][1] = fourthTemp
+            # matrix[len(matrix)-2][len(matrix)-2] = secondTemp
+           
+
+                
 
         
 
