@@ -20,7 +20,6 @@ class Solution:
         numberOfNonCenterPerRow = 2
         TotalcenterIterations = len(matrix)  - numberOfNonCenterPerRow 
         firstTempStartingIndex = 1
-        numberOfCenters = 
         if len(matrix) >= 4:
             for iterations in range(TotalcenterIterations - 1):
                 firstTemp = matrix[firstTempStartingIndex][firstTempStartingIndex+iterations]
@@ -33,36 +32,44 @@ class Solution:
                 matrix[len(matrix)-2-iterations][firstTempStartingIndex] = fourthTemp
                 matrix[len(matrix)-2][len(matrix)-2-iterations] = secondTemp
 
+        if len(matrix) >= 6:
+            layersOfCenters = ((len(matrix) - 2) // 2) 
+            offset = 3
+            firstTempStart = 2
+            innerLoopNumberOfTimes = len(matrix) -1 - 4
+            for numberOfLayers in range(layersOfCenters-1):
+                # print(len(matrix)-offset - 2)
+                print(innerLoopNumberOfTimes)
+                for centerIterator in range(innerLoopNumberOfTimes):
+                    firstTemp = matrix[firstTempStart][firstTempStart + centerIterator]
+                    secondTemp = matrix[firstTempStart + centerIterator][len(matrix) - offset]
+                    thirdTemp = matrix[len(matrix) - offset-centerIterator][firstTempStart]
+                    fourthTemp = matrix[len(matrix)-offset][len(matrix)-offset-centerIterator]
+                    # print(firstTemp, secondTemp, thirdTemp, fourthTemp)
+
+                    matrix[firstTempStart+centerIterator][len(matrix)-offset] = firstTemp
+                    matrix[len(matrix)-offset][len(matrix)-offset-centerIterator] = secondTemp
+                    matrix[len(matrix)-offset-centerIterator][firstTempStart] = fourthTemp
+                    matrix[firstTempStart][firstTempStart+centerIterator]= thirdTemp
+                  
+                firstTempStart = firstTempStart + 1
+                offset = offset + 1
+                innerLoopNumberOfTimes = innerLoopNumberOfTimes - 2
+                
+
+            
 
 
+             
 
 
+        else:
+            layersOfCenters = 0
 
+        #  for layersIterations in range(layersOfCenters - 1):
+        #         print(layersIterations)
 
-
-
-            # for loopIterations in range(TotalcenterIterations - 1):
-            #     firstTemp = matrix[1][1]
-            #     secondTemp = matrix[1][len(matrix)-2]
-            #     thirdTemp = matrix[len(matrix)-2][1]
-            #     fourthTemp = matrix[len(matrix)-2][len(matrix)-2]
-            #     print(firstTemp)
-
-            #     matrix[1][1] = thirdTemp
-            #     matrix[1][len(matrix)-2] = firstTemp
-            #     matrix[len(matrix)-2][1] = fourthTemp
-            #     matrix[len(matrix)-2][len(matrix)-2] = secondTemp
-
-            # firstTemp = matrix[1][1]
-            # secondTemp = matrix[1][len(matrix)-2]
-            # thirdTemp = matrix[len(matrix)-2][1]
-            # fourthTemp = matrix[len(matrix)-2][len(matrix)-2]
-
-            # matrix[1][1] = thirdTemp
-            # matrix[1][len(matrix)-2] = firstTemp
-            # matrix[len(matrix)-2][1] = fourthTemp
-            # matrix[len(matrix)-2][len(matrix)-2] = secondTemp
-           
+        
 
                 
 
