@@ -5,8 +5,8 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        if l1.next == None:
-            return l1
+        if l1.next == None and l2.next == None and l1.val + l2.val < 10:
+            return ListNode(l1.val + l2.val)
         sum = l1.val + l2.val
         carry = 0
         if sum >= 10:
@@ -20,22 +20,64 @@ class Solution:
             returnListHead = returnList
             l1 = l1.next
             l2 = l2.next
-        while l1 != None and l2 != None:
-            sum = l1.val + l2.val + carry
-            if l2.next == None and l1.next != None:
-                sum = l1.val + 0 + carry
+        while l1 != None or l2 != None:
+    
+            if l1 == None:
+                sum = l2.val + carry
+                if sum < 10:
+                    insertNode = ListNode(sum)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 0
+                elif sum > 10:
+                    insertNode = ListNode(sum % 10)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 0
+                elif sum == 10:
+                    insertNode = ListNode(sum%10)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 1
+            if l2 == None:
+                sum = l1.val + carry
+                if sum < 10:
+                    insertNode = ListNode(sum)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 0
+                elif sum > 10:
+                    insertNode = ListNode(sum % 10)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 0
+                elif sum == 10:
+                    insertNode = ListNode(sum%10)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 1
+            if l1 != None and l2 != None:
+                sum = l1.val + carry + l2.val
                 print(sum)
-            if sum >= 10:
-                carry = 1
-                newNode = ListNode(sum % 10)
-                returnList.next = newNode
-                returnList = returnList.next
-            else:
-                carry = 0
-                newNode = ListNode(sum)
-                returnList.next = newNode
-            l1 = l1.next
-            if l2.next != None:
+                if sum < 10:
+                    insertNode = ListNode(sum)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 0
+                elif sum > 10:
+                    insertNode = ListNode(sum % 10)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 1
+                elif sum == 10:
+                    insertNode = ListNode(sum%10)
+                    returnList.next = insertNode
+                    returnList = returnList.next
+                    carry = 1
+
+            if l1 != None:
+                l1 = l1.next
+            if l2 != None:
                 l2 = l2.next
             
         if carry == 1:
@@ -43,7 +85,7 @@ class Solution:
             newNode = ListNode(1)
             returnList.next = newNode
             
-    return returnListHead
+        return returnListHead
                 
             
         
