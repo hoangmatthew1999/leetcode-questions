@@ -1,41 +1,90 @@
-class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        returnArray = [[]]
-        returnArray = []
-                
-
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
         currentLength = 3
-        withoutLastElementArray = []
+        returnArray = []
+        if len(nums) == 1:
+          returnArray.append(nums)
+          returnArray.append([])
+          return returnArray
+        if len(nums) == 2:
+          returnArray.append([nums[0]])
+          returnArray.append([nums[1]])
+          returnArray.append([])
+          returnArray.append(nums)
+          return returnArray
+
+        elementIndexDict = dict()
+        for i in range(len(nums)):
+          elementIndexDict[nums[i]] = i
+                
         firstElementIndex = 0
-        for movingFirstIndex in range(len(nums) - firstElementIndex- 2):
-          withoutLastElementArray = []
-          for createArray in range(currentLength - 1):
-            withoutLastElementArray.append(nums[firstElementIndex + createArray])
-          firstElementIndex = firstElementIndex + 1
-          lastElementIndex = firstElementIndex + currentLength - 2
+        currentLength = 4
+        lastElementIndex = firstElementIndex + currentLength
+
+        previousLevel = []
+        currentLevel = []
+
+        for lengthOne in range(len(nums)):
+          sizeOneArray = []
+          sizeOneArray.append(nums[lengthOne])
+          currentLevel.append(sizeOneArray)
+          returnArray.append(sizeOneArray)
+
+        previousLevel = currentLevel
+        currentLevel = []
+        currentLength = 2
+        # for lengthTwo in range(len(nums)):
+        currentArray = previousLevel[0]
+        currentArray = currentArray[:]
+        lastElementIndex = elementIndexDict[currentArray[len(currentArray) -1]] + 1
+        for nextCurrentArrayElem in range(len(previousLevel)):
+          currentArray = previousLevel[nextCurrentArrayElem]
+          currentArray = currentArray[:]
+          lastElementIndex = elementIndexDict[currentArray[len(currentArray) -1]] + 1
+          for addLastElem in range(len(nums) - lastElementIndex):
+            if len(currentArray ) < currentLength:
+              currentArray.append(nums[lastElementIndex])
+              arrayTemp = currentArray[:]
+              returnArray.append(arrayTemp)
+              currentLevel.append(arrayTemp)
+            else:
+              currentArray[len(currentArray)-1] = nums[lastElementIndex + addLastElem]
+              arrayTemp = currentArray[:]
+              returnArray.append(arrayTemp)
+              currentLevel.append(arrayTemp)
+        
+       
+        previousLevel = currentLevel
+        currentLevel = []
+        currentLength = currentLength + 1
+        for increaseCurrentLength in range(len(nums) - currentLength):
+          for nextCurrentArrayElem in range(len(previousLevel)):
+              currentArray = previousLevel[nextCurrentArrayElem]
+              currentArray = currentArray[:]
+              lastElementIndex = elementIndexDict[currentArray[len(currentArray) -1]] + 1
+              for addLastElem in range(len(nums) - lastElementIndex):
+                if len(currentArray ) < currentLength:
+                  currentArray.append(nums[lastElementIndex])
+                  arrayTemp = currentArray[:]
+                  returnArray.append(arrayTemp)
+                  currentLevel.append(arrayTemp)
+                else:
+                  currentArray[len(currentArray)-1] = nums[lastElementIndex + addLastElem]
+                  arrayTemp = currentArray[:]
+                  returnArray.append(arrayTemp)
+                  currentLevel.append(arrayTemp)
+        
+          currentLength = currentLength + 1
+          previousLevel = currentLevel
+          currentLevel = []
+          print(previousLevel)
+
+
+        returnArray.append(nums)
+        returnArray.append([])
           
-          lastElementIndex = firstElementIndex + currentLength - 2
-          for movingSecondIndex in range(len(nums) - lastElementIndex):
-            for movingThirdIndex in range(len(nums) - lastElementIndex):
-              if len(withoutLastElementArray) < currentLength:
-                withoutLastElementArray.append(nums[lastElementIndex+movingThirdIndex])
-                arrayTemp = withoutLastElementArray[:]
-                returnArray.append(arrayTemp)
-              else:
-                wleaLastElement = len(withoutLastElementArray) - 1
-                withoutLastElementArray[wleaLastElement]=nums[lastElementIndex+movingThirdIndex]
-                arrayTemp = withoutLastElementArray[:]
-                returnArray.append(arrayTemp)
-            withoutLastElementArray.pop()
-            lastElementIndex = lastElementIndex + 1
-            withoutLastElementArray[len(withoutLastElementArray)-1] = nums[lastElementIndex - 1]
-            
-        
-            
-            
-     
-
-
         return returnArray
-        
-    
