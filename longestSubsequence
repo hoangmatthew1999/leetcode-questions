@@ -1,0 +1,43 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        
+
+        if len(s) == 1:
+          return 1
+        if len(s) == 0:
+          return 0
+        if len(set(s)) == 1:
+          return 1
+        
+
+        letterDB = dict()
+        returnString = ""
+        returnNumber = 0
+        returnStringTemp = ""
+
+        for i in range(len(s)):
+          if s[i] not in letterDB:
+            letterDB[s[i]] = i
+            returnString = returnString + s[i]
+            returnNumber = len(returnString)
+          elif s[i] in letterDB:
+            if len(returnString) > returnNumber:
+              returnNumber = len(returnString)
+              letterDB = dict()   
+              letterDB[s[i]] = i
+              returnString = s[i]
+            else:
+              letterDB = dict()
+              letterDB[s[i]] = i
+              returnString = s[i]
+          print(returnString)
+
+
+
+        return returnNumber
+
+        
